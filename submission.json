@@ -1,0 +1,68 @@
+{
+  "milestone": "D2",
+  "title": "混凝土裂缝图像筛查器",
+  "members": [
+    {
+      "name": "学生姓名",
+      "role": "developer"
+    }
+  ],
+  "run_commands": {
+    "install": "pip install -r requirements.txt",
+    "download_data": "python scripts/download_data.py",
+    "make_test_data": "python scripts/make_test_data.py --count 80",
+    "run": "python -m src.main",
+    "run_with_epochs": "python -m src.main --epochs 10",
+    "run_no_hp": "python -m src.main --no-hp",
+    "check_only": "python -m src.main --check-only",
+    "test": "python -m unittest tests.test_basic -v"
+  },
+  "files": {
+    "readme": "README.md",
+    "report": "report.md",
+    "presentation": "presentation.pptx",
+    "source_code": [
+      "src/__init__.py",
+      "src/config.py",
+      "src/data_check.py",
+      "src/dataset.py",
+      "src/baseline.py",
+      "src/model.py",
+      "src/fc_model.py",
+      "src/pretrained.py",
+      "src/hyperparam_search.py",
+      "src/train.py",
+      "src/evaluate.py",
+      "src/leakage_check.py",
+      "src/main.py"
+    ],
+    "tests": [
+      "tests/__init__.py",
+      "tests/test_basic.py"
+    ],
+    "scripts": [
+      "scripts/download_data.py",
+      "scripts/make_test_data.py",
+      "scripts/make_presentation.py"
+    ],
+    "outputs": [
+      "outputs/results/results.json",
+      "outputs/figures/training_history_cnn.png",
+      "outputs/figures/training_history_fc.png",
+      "outputs/figures/training_history_pretrained.png",
+      "outputs/figures/confusion_matrices.png",
+      "outputs/figures/error_cases.png",
+      "outputs/models/small_cnn.pth",
+      "outputs/models/fc_net.pth",
+      "outputs/models/pretrained_resnet18.pth"
+    ]
+  },
+  "data": {
+    "source": "Kaggle Concrete Crack Images",
+    "url": "https://www.kaggle.com/datasets/arunrk7/surface-crack-detection",
+    "positive_images": 20000,
+    "negative_images": 20000,
+    "license": "CC0: Public Domain"
+  },
+  "results_note": "已使用合成数据(80张/类)运行验证，结果保存在 outputs/results/results.json。四模型对比：多数类基线(准确率0.50,召回0)、FCNet(准确率0.50,召回0,参数39.6M)、SmallCNN(准确率0.50,召回1.0,20张误报)、Pretrained ResNet18(准确率1.0,召回1.0,0误报0漏检,仅1026可训练参数)。超参数搜索已完成,数据泄漏0对。使用真实Kaggle数据(20000张/类)运行可获得最终结果。"
+}
